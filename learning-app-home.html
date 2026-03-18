@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习小程序首页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e6f7ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* 手机框架 */
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background-color: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 顶部状态栏 */
+        .status-bar {
+            height: 44px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            height: 44px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .navbar-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #333333;
+        }
+        
+        /* 内容区域 */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        /* 视频卡片 */
+        .video-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .video-info {
+            padding: 12px;
+        }
+        
+        .video-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333333;
+            line-height: 1.4;
+        }
+        
+        .video-description {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999999;
+        }
+        
+        .video-stats {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        /* 特色视频区域 */
+        .featured-section {
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #333333;
+        }
+        
+        /* 主容器 */
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 400px) {
+            body {
+                padding: 0;
+            }
+            
+            .phone-frame {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- 手机原型 -->
+        <div class="phone-frame">
+            <!-- 状态栏 -->
+            <div class="status-bar">
+                <div>9:41</div>
+                <div>信号 WiFi 电池</div>
+            </div>
+            
+            <!-- 导航栏 -->
+            <div class="navbar">
+                <div class="navbar-title">学习中心</div>
+            </div>
+            
+            <!-- 内容区域 -->
+            <div class="content">
+                <!-- 特色视频区域 -->
+                <div class="featured-section">
+                    <h2 class="section-title">推荐课程</h2>
+                    
+                    <!-- 视频卡片 1 -->
+                    <div class="video-card" onclick="navigateToVideo('高效学习方法')">
+                        <div class="video-thumbnail">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=teacher%20teaching%20students%20in%20classroom%20modern%20education&image_size=landscape_16_9" alt="高效学习方法">
+                            <div class="video-duration">15:30</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">高效学习方法与技巧</div>
+                            <div class="video-description">掌握科学的学习方法，提高学习效率，快速提升成绩</div>
+                            <div class="video-meta">
+                                <div class="video-stats">
+                                    <div class="stat-item">
+                                        <span>👁️</span>
+                                        <span>2.3万</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span>👍</span>
+                                        <span>1.2k</span>
+                                    </div>
+                                </div>
+                                <div>李老师</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 视频卡片 2 -->
+                    <div class="video-card" onclick="navigateToVideo('数学解题技巧')">
+                        <div class="video-thumbnail">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mathematics%20teacher%20solving%20problems%20on%20whiteboard&image_size=landscape_16_9" alt="数学解题技巧">
+                            <div class="video-duration">20:15</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">数学解题技巧精讲</div>
+                            <div class="video-description">深入浅出讲解数学解题思路，帮助学生快速掌握解题方法</div>
+                            <div class="video-meta">
+                                <div class="video-stats">
+                                    <div class="stat-item">
+                                        <span>👁️</span>
+                                        <span>1.8万</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span>👍</span>
+                                        <span>980</span>
+                                    </div>
+                                </div>
+                                <div>王老师</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 视频卡片 3 -->
+                    <div class="video-card" onclick="navigateToVideo('英语听力训练')">
+                        <div class="video-thumbnail">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=english%20teacher%20teaching%20listening%20skills%20to%20students&image_size=landscape_16_9" alt="英语听力训练">
+                            <div class="video-duration">18:45</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">英语听力训练方法</div>
+                            <div class="video-description">实用的英语听力提升技巧，帮助学生快速提高听力水平</div>
+                            <div class="video-meta">
+                                <div class="video-stats">
+                                    <div class="stat-item">
+                                        <span>👁️</span>
+                                        <span>1.5万</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span>👍</span>
+                                        <span>850</span>
+                                    </div>
+                                </div>
+                                <div>张老师</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 视频卡片 4 -->
+                    <div class="video-card" onclick="navigateToVideo('物理实验技巧')">
+                        <div class="video-thumbnail">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=physics%20teacher%20doing%20experiment%20in%20laboratory&image_size=landscape_16_9" alt="物理实验技巧">
+                            <div class="video-duration">22:30</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">物理实验技巧与方法</div>
+                            <div class="video-description">详细讲解物理实验操作技巧，帮助学生掌握实验要领</div>
+                            <div class="video-meta">
+                                <div class="video-stats">
+                                    <div class="stat-item">
+                                        <span>👁️</span>
+                                        <span>1.2万</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span>👍</span>
+                                        <span>750</span>
+                                    </div>
+                                </div>
+                                <div>刘老师</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 视频导航功能
+        function navigateToVideo(videoTitle) {
+            window.location.href = 'video-player.html';
+        }
+        
+        // 确保页面适应手机屏幕
+        function adjustScreenSize() {
+            const phoneFrame = document.querySelector('.phone-frame');
+            if (window.innerWidth <= 400) {
+                phoneFrame.style.width = '100%';
+                phoneFrame.style.height = '100vh';
+                phoneFrame.style.borderRadius = '0';
+                phoneFrame.style.boxShadow = 'none';
+            } else {
+                phoneFrame.style.width = '375px';
+                phoneFrame.style.height = '812px';
+                phoneFrame.style.borderRadius = '40px';
+                phoneFrame.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+            }
+        }
+        
+        // 初始化和窗口大小变化时调整
+        window.onload = adjustScreenSize;
+        window.onresize = adjustScreenSize;
+    </script>
+</body>
+</html>
